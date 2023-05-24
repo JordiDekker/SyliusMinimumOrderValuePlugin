@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Nedac\SyliusMinimumOrderValuePlugin\Checkout;
 
+use Setono\MainRequestTrait\MainRequestTrait;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGeneratorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -18,6 +19,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class CheckoutResolver implements EventSubscriberInterface
 {
+    use MainRequestTrait;
+
     private CartContextInterface $cartContext;
     private CheckoutStateUrlGeneratorInterface $urlGenerator;
     private RequestMatcherInterface $requestMatcher;
@@ -37,7 +40,7 @@ final class CheckoutResolver implements EventSubscriberInterface
 
     public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$this->isMainRequest($event)) {
             return;
         }
 
