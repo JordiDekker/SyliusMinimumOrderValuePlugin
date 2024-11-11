@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4 || ^8.0",
-        "sylius/sylius": ">=1.10.2 <1.13.0",
+        "sylius/sylius": ">=1.10.2",
         "setono/symfony-main-request-trait": "^1.0"
     },
     "require-dev": {
